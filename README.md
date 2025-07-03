@@ -3,11 +3,7 @@ LOGO
 # konusuyoruz
 
 Team Members
-Product Owner	Melis Alevli  
-Scrum  Master	Beytullah Söylev 
-Developer	Esra Cüm 
-Developer	Mehmet Ali Duran 
-Developer	Betül Güner
+
 ![image](https://github.com/user-attachments/assets/27aa426a-ece0-479e-b197-debe76313b2f)
 
 Ürün İsmi
