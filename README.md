@@ -2,19 +2,19 @@
 ![Ekran görüntüsü 2025-07-04 150630](https://github.com/user-attachments/assets/4d2e4a8b-5cad-40f2-9073-750d0d24f548)
 
 
-Takım Üyeleri
+# Takım Üyeleri
 
 ![image](https://github.com/user-attachments/assets/27aa426a-ece0-479e-b197-debe76313b2f)
 
-Ürün İsmi
-# konusuyoruz
+# Ürün İsmi
+konusuyoruz
 
 
-Ürün Açıklaması
+# Ürün Açıklaması
 Sunum yapma, mülakat veya fikir anlatma gibi iletişim becerileri, profesyonel ve akademik başarı için kritik bir rol oynamaktadır. Ancak öğrenciler ve profesyoneller, bu becerilerini geliştirirken genellikle yeterli ve anlık geri bildirim alma imkânı bulamazlar. Yapay Zekâ Destekli İletişim Koçu, bu soruna çözüm olarak geliştirilmiş bir mobil ve web uygulamasıdır. Kullanıcıların konuşma pratiği yaptığı videoları kaydederek, yapay zekâ tabanlı analizlerle onlara anında ve detaylı geri bildirimler sunar. Bu sayede kullanıcılar, konuşma hızı, ses tonu, anlatım netliği gibi birçok farklı alanda kendilerini objektif bir şekilde değerlendirip geliştirme fırsatı bulur.
 
 
-Ürün Özellikleri
+# Ürün Özellikleri
 
 Detaylı Konuşma Analizi: Sistem, OpenAI Whisper veya Google Speech-to-Text gibi teknolojilerle konuşmaları yazıya döker. Konuşma hızı ve "eee", "şey" gibi dolgu kelimelerin kullanım sıklığı analiz edilir.
 
@@ -25,7 +25,7 @@ Ses, Tonlama ve Duygu Analizi: Yüz ifadelerinden (Microsoft Azure Face API, Ama
 Vücut Dili ve Göz Teması Analizi: Google MediaPipe ile yüz, el ve vücut hareketleri takip edilir. OpenCV ve TensorFlow kullanılarak kullanıcının postürü, jest ve mimikleri analiz edilir. Göz teması, el-kol hareketleri ve duruş hakkında geri bildirim sağlanır.
 
 
-Kullanıcı Deneyimi ve Raporlama:
+# Kullanıcı Deneyimi ve Raporlama:
 
 Kullanıcılar "Sunum Yap" veya "Mülakat Simülasyonu" gibi farklı modlarda pratik yapabilirler.
 
@@ -37,13 +37,13 @@ Kullanıcılar, video üzerinde zaman çizelgesine eklenmiş anlık yorumları g
 
 
 
-Genişleme Fikirleri (Ek Özellikler):
+# Genişleme Fikirleri (Ek Özellikler):
 
 Oyunlaştırma (Gamification): Kullanıcıların motivasyonunu artırmak için rozetler ve seviyeler verilebilir.
 Akran Değerlendirmesi (Peer Feedback): Kullanıcılar, arkadaşlarını davet ederek onlardan da geri bildirim alabilirler.
 Kurumsal Entegrasyon: Okullar, kurslar ve işe alım platformları için API entegrasyonu sağlanabilir.
 
-Hedef Kitle
+# Hedef Kitle
 * Üniversite ve lise öğrencileri 
 
 * İş görüşmelerine hazırlanan profesyoneller ve yeni mezunlar 
@@ -52,7 +52,7 @@ Hedef Kitle
 
 * Öğretmenler ve eğitmenler 
 
-Product Backlog
+# Product Backlog
 
 MVP (Minimum Viable Product) - Çekirdek Fonksiyonlar
 
@@ -60,7 +60,7 @@ Kullanıcı Yönetimi:
 
 Kullanıcı kaydı ve girişi.
 
-Kayıt Modülü:
+# Kayıt Modülü:
 
 Web uygulaması için WebRTC ve MediaRecorder API kullanarak sesli/görüntülü kayıt özelliği.
 
@@ -76,7 +76,7 @@ Konuşma Hızı ve Dolgu Kelime Analizi: librosa veya pyAudioAnalysis ile temel 
 
 Geri Bildirim Ekranı: Analiz sonuçlarını gösteren basit bir raporlama arayüzü (Konuşma hızı, dolgu kelime sayısı).
 
-Altyapı:
+# Altyapı:
 
 Backend servisinin FastAPI veya Node.js ile oluşturulması.
 
@@ -88,7 +88,7 @@ Video ve ses dosyalarının sunucuya yüklenmesi ve asenkron işlenmesi.
 
 
 
-Sürüm 2 - Gelişmiş Analiz ve Detaylı Raporlama
+# Sürüm 2 - Gelişmiş Analiz ve Detaylı Raporlama
 
 Metin Yapısı Analizi:
 
@@ -107,13 +107,13 @@ Skor kartı özelliğinin eklenmesi ("Anlatım Netliği: %85").
 
 Video üzerinde zaman çizelgesine bağlı yorumların gösterilmesi.
 
-Pratik Modları:
+# Pratik Modları:
 
 "Sunum Yap" ve "Mülakat Simülasyonu" modlarının arayüzde ayrıştırılması.
 
 
 
-Sürüm 3 - Multimedya Analizi ve Etkileşim
+# Sürüm 3 - Multimedya Analizi ve Etkileşim
 
 Duygu ve Tonlama Analizi:
 
@@ -147,8 +147,8 @@ Okullar ve şirketler için API entegrasyonu sağlanması.
 
 
 
-## Sprint 1
-Sprint Notları
+# Sprint 1
+# Sprint Notları
 
 Proje yönetimi aracı olarakJira kullanılmasına karar verildi ve proje panosu oluşturuldu.
 
@@ -158,17 +158,17 @@ Sprint 1'in ana hedefi, kullanıcının kamerasından ve mikrofonundan sesli-gö
 
 Web uygulaması için .......... teknolojilerinin kullanılmasına karar verildi. Arka plan (backend) altyapısı ........ ile kurulmaya başlandı.
 
-Tahmin Edilen Tamamlanacak Puan
+# Tahmin Edilen Tamamlanacak Puan
 
 30 Puan
 
-Tahmin Mantığı
+# Tahmin Mantığı
 
 Projenin tamamı için yaklaşık 120 puanlık bir iş yükü öngörüldü. İlk sprint olduğu için takımın hızı (velocity) henüz bilinmiyordu.
 
 Bu sebeple, en temel ve kritik fonksiyonları içeren "Çekirdek Kayıt ve Analiz" epic'i içerisinden 30 puanlık bir hedef, gerçekçi ve motive edici bir başlangıç olarak kabul edildi. Puanlamada Fibonacci serisi (1, 2, 3, 5, 8...) kullanıldı.
 
-Daily Scrum
+# Daily Scrum
 
 Daily Scrum toplantıları her gün Google Meet ve Whatsapp üzerinden yapıldı.
 
@@ -184,7 +184,7 @@ Sprint 1 Jira Panosu: https://yztabootcamp.atlassian.net/browse/SCRUM-4?atlOrigi
 
 Sprint başı ve sonundaki pano ekran görüntüleri GitHub repomuzda mevcuttur.
 
-Screenshot
+# Screenshot
 
 Sprint 1 sonunda ürünümüz, kullanıcının tarayıcı üzerinden kamera ve mikrofon izni vererek kayıt başlatabildiği bir web arayüzüne sahiptir. Kayıt durdurulduğunda, oluşturulan video dosyası arka plana gönderilmeye hazır hale gelmektedir. Arayüz, bu sprintte sadece temel fonksiyonlara odaklanmıştır.
 
@@ -200,11 +200,9 @@ Gelen Geri Bildirim: Kayıt özelliğinin sorunsuz çalışması olumlu karşıl
 
 Alınan Karar: Sprint 2'nin en önemli hedefi, Google Speech-to-Text API'sini entegre ederek kaydedilen sesin metin karşılığını kullanıcıya göstermek olacaktır.
 
-Sprint Retrospective
+# Sprint Retrospective
 
 Neler İyi Gitti?
-
-Takım içi iletişim ve iş birliği geliştirme sürecinde çok verimliydi.
 
 ...... ile arka plan kurulumu beklenenden daha hızlı tamamlandı.
 
