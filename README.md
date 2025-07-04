@@ -1,13 +1,13 @@
-LOGO
 
-# konusuyoruz
+![Ekran görüntüsü 2025-07-04 150630](https://github.com/user-attachments/assets/4d2e4a8b-5cad-40f2-9073-750d0d24f548)
 
-Team Members
+
+Takım Üyeleri
 
 ![image](https://github.com/user-attachments/assets/27aa426a-ece0-479e-b197-debe76313b2f)
 
 Ürün İsmi
-Hitabet Asistanı
+# konusuyoruz
 
 
 Ürün Açıklaması
