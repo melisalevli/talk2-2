@@ -107,7 +107,7 @@ Skor kartı özelliğinin eklenmesi ("Anlatım Netliği: %85").
 
 Video üzerinde zaman çizelgesine bağlı yorumların gösterilmesi.
 
-# Pratik Modları:
+Pratik Modları:
 
 "Sunum Yap" ve "Mülakat Simülasyonu" modlarının arayüzde ayrıştırılması.
 
