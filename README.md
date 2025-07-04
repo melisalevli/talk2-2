@@ -60,7 +60,7 @@ Kullanıcı Yönetimi:
 
 Kullanıcı kaydı ve girişi.
 
-# Kayıt Modülü:
+Kayıt Modülü:
 
 Web uygulaması için WebRTC ve MediaRecorder API kullanarak sesli/görüntülü kayıt özelliği.
 
@@ -76,7 +76,7 @@ Konuşma Hızı ve Dolgu Kelime Analizi: librosa veya pyAudioAnalysis ile temel 
 
 Geri Bildirim Ekranı: Analiz sonuçlarını gösteren basit bir raporlama arayüzü (Konuşma hızı, dolgu kelime sayısı).
 
-# Altyapı:
+Altyapı:
 
 Backend servisinin FastAPI veya Node.js ile oluşturulması.
 
