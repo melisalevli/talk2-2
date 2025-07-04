@@ -40,7 +40,9 @@ Kullanıcılar, video üzerinde zaman çizelgesine eklenmiş anlık yorumları g
 # Genişleme Fikirleri (Ek Özellikler):
 
 Oyunlaştırma (Gamification): Kullanıcıların motivasyonunu artırmak için rozetler ve seviyeler verilebilir.
+
 Akran Değerlendirmesi (Peer Feedback): Kullanıcılar, arkadaşlarını davet ederek onlardan da geri bildirim alabilirler.
+
 Kurumsal Entegrasyon: Okullar, kurslar ve işe alım platformları için API entegrasyonu sağlanabilir.
 
 # Hedef Kitle
