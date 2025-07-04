@@ -192,7 +192,7 @@ Sprint 1 sonunda ürünümüz, kullanıcının tarayıcı üzerinden kamera ve m
 
 Mevcut arayüzün ekran görüntüsü GitHub reposuna eklenmiştir.
 
-Sprint Review
+# Sprint Review
 
 Sprint sonunda yapılan sunumda, paydaşlara çalışan prototip gösterildi.
 
