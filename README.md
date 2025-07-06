@@ -1,8 +1,8 @@
 
-![Ekran görüntüsü 2025-07-04 150630](https://github.com/user-attachments/assets/4d2e4a8b-5cad-40f2-9073-750d0d24f548)
+![talk22](https://github.com/user-attachments/assets/df8e7c91-9923-4818-8e0d-9a58f79eab17)
 
 
-# Talk 2-2 Takım Üyeleri
+# Takım Üyeleri
 
 ![image](https://github.com/user-attachments/assets/27aa426a-ece0-479e-b197-debe76313b2f)
 
@@ -16,7 +16,7 @@ sunar. Sunum yapma, mülakat konuşması ya da fikir anlatımı gibi durumlara h
 bireylere detaylı geri bildirim sağlayarak daha net, etkili ve özgüvenli bir ifade kazandırmayı
 hedefler.
 
-#Hedef Kitle
+# Hedef Kitle
 Talk 2-2 belirli bir meslek grubuna değil, iletişim becerisini geliştirmek isteyen herkese hitap
 eder:
 • Üniversite ve lise öğrencileri
@@ -81,35 +81,19 @@ Oyunlaştırma Rozetler, görevler, seviye sistemi
 Peer Feedback Diğer kullanıcılar ya da eğitmen yorumları
 Kurumsal Entegrasyon Okullara, kurslara ve işe alım platformlarına API ile bağlantı
 
-# Teknoloji Altyapısı
-Bileşen Teknoloji
-Web Uygulama React + WebRTC
-Mobil Uygulama Flutter veya React Native
-Backend FastAPI veya Node.js
-Yapay Zekâ GPT-4 API, Whisper, spaCy
-Veritabanı PostgreSQL veya MongoDB
-Bulut Hizmeti AWS / Google Cloud / Azure
-Frontend (React.js)
- ⇅
-Backend API (FastAPI veya Node.js)
- ⇅
-NLP Servisleri (GPT-4, spaCy, transformers)
- ⇅
-Veritabanı (PostgreSQL)
- ⇅
-Dosya Depolama (AWS S3 veya Firebase)
-
-
 # Sprint 1
-# Sprint Notları
+
 # Teknoloji Altyapısı
+
 Bileşen Teknoloji
 Web Uygulama React + WebRTC
 Mobil Uygulama Flutter veya React Native
 Backend FastAPI veya Node.js
 Yapay Zekâ GPT-4 API, Whisper, spaCy
 Veritabanı PostgreSQL veya MongoDB
+
 Bulut Hizmeti AWS / Google Cloud / Azure
+
 Frontend (React.js)
  ⇅
 Backend API (FastAPI veya Node.js)
@@ -151,7 +135,6 @@ Sprint 1 Jira Panosu: https://yztabootcamp.atlassian.net/jira/software/projects/
 
 # Sprint Review
 
-
 Alınan Karar: Sprint 2'nin en önemli hedefi, Google Speech-to-Text API'sini entegre ederek kaydedilen sesin metin karşılığını kullanıcıya göstermek olacaktır.
 
 # Sprint Retrospective
@@ -159,7 +142,7 @@ Alınan Karar: Sprint 2'nin en önemli hedefi, Google Speech-to-Text API'sini en
 Neler İyi Gitti?
 Takım arkadaşlarımızla işbirliğimiz ve iletişimimiz iyiydi.
 
-Gemini ile arka plan kurulumu beklenenden daha hızlı tamamlandı.
+Gemini ile işlemlerimiz daha hızlı tamamlandı.
 
 Neler Daha İyi Olabilirdi?
 
