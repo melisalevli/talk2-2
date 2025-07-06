@@ -6,159 +6,124 @@
 
 ![image](https://github.com/user-attachments/assets/27aa426a-ece0-479e-b197-debe76313b2f)
 
-# Ürün İsmi
-konusuyoruz
 
+# Ürün Adı: Talk 2-2
+“Daha net, daha sen.”
 
-# Ürün Açıklaması
-Sunum yapma, mülakat veya fikir anlatma gibi iletişim becerileri, profesyonel ve akademik başarı için kritik bir rol oynamaktadır. Ancak öğrenciler ve profesyoneller, bu becerilerini geliştirirken genellikle yeterli ve anlık geri bildirim alma imkânı bulamazlar. Yapay Zekâ Destekli İletişim Koçu, bu soruna çözüm olarak geliştirilmiş bir mobil ve web uygulamasıdır. Kullanıcıların konuşma pratiği yaptığı videoları kaydederek, yapay zekâ tabanlı analizlerle onlara anında ve detaylı geri bildirimler sunar. Bu sayede kullanıcılar, konuşma hızı, ses tonu, anlatım netliği gibi birçok farklı alanda kendilerini objektif bir şekilde değerlendirip geliştirme fırsatı bulur.
+# Ürün Amacı
+Talk 2-2, kullanıcıların iletişim becerilerini geliştirmeleri için yapay zekâ destekli kişisel bir koç
+sunar. Sunum yapma, mülakat konuşması ya da fikir anlatımı gibi durumlara hazırlık sürecinde,
+bireylere detaylı geri bildirim sağlayarak daha net, etkili ve özgüvenli bir ifade kazandırmayı
+hedefler.
 
+#Hedef Kitle
+Talk 2-2 belirli bir meslek grubuna değil, iletişim becerisini geliştirmek isteyen herkese hitap
+eder:
+• Üniversite ve lise öğrencileri
+• İş görüşmesine hazırlananlar
+• İçerik üreticileri, eğitimciler
+• Sunum yapacak profesyoneller
+• Genel olarak kendini daha iyi ifade etmek isteyen bireyler
 
-# Ürün Özellikleri
+# Persona Örnekleri
 
-Detaylı Konuşma Analizi: Sistem, OpenAI Whisper veya Google Speech-to-Text gibi teknolojilerle konuşmaları yazıya döker. Konuşma hızı ve "eee", "şey" gibi dolgu kelimelerin kullanım sıklığı analiz edilir.
+• Zeynep / Üniversite Öğrencisi
+Yaş: 22 Meslek: Endüstri Mühendisliği 4. sınıf öğrencisi
+Hedefi: İş mülakatlarında kendini net ve profesyonel ifade edebilmek
+Problem: Cevap verirken çok "şey" diyor, heyecanlanınca cümleleri uzuyor.
+Beklentisi: Daha akıcı ve özgüvenli konuşmak, eksiklerini yapay zekâdan öğrenmek.
 
-Metin ve Yapı Geri Bildirimi: GPT-4 veya Cohere gibi dil modelleri kullanılarak konuşma metninin akıcılığı, netliği ve dilbilgisi yapısı değerlendirilir . spaCy ve transformers kütüphaneleri ile cümle yapısı analizi yapılır. Kullanıcılara "Bu cümle çok uzundu, bölebilirsin" gibi somut öneriler sunulur.
-
-Ses, Tonlama ve Duygu Analizi: Yüz ifadelerinden (Microsoft Azure Face API, Amazon Rekognition) ve ses tonundan (Wav2Vec+LSTM modelleri) duygu analizi yapılır. Bu analiz, kullanıcının konuşma sırasındaki özgüven ve kararsızlık gibi durumlarını ortaya koyar.
-
-Vücut Dili ve Göz Teması Analizi: Google MediaPipe ile yüz, el ve vücut hareketleri takip edilir. OpenCV ve TensorFlow kullanılarak kullanıcının postürü, jest ve mimikleri analiz edilir. Göz teması, el-kol hareketleri ve duruş hakkında geri bildirim sağlanır.
-
-
-# Kullanıcı Deneyimi ve Raporlama:
-
-Kullanıcılar "Sunum Yap" veya "Mülakat Simülasyonu" gibi farklı modlarda pratik yapabilirler.
-
-Analiz sonuçları, konuşma hızı veya göz teması yüzdesi gibi grafiklerle sunulur.
-
-Kullanıcılar, video üzerinde zaman çizelgesine eklenmiş anlık yorumları görebilirler.
-
-"Anlatım Netliği: %85, Güven: %70" gibi özet bir skor kartı sağlanır.
-
-
-
-# Genişleme Fikirleri (Ek Özellikler):
-
-Oyunlaştırma (Gamification): Kullanıcıların motivasyonunu artırmak için rozetler ve seviyeler verilebilir.
-
-Akran Değerlendirmesi (Peer Feedback): Kullanıcılar, arkadaşlarını davet ederek onlardan da geri bildirim alabilirler.
-
-Kurumsal Entegrasyon: Okullar, kurslar ve işe alım platformları için API entegrasyonu sağlanabilir.
-
-# Hedef Kitle
-* Üniversite ve lise öğrencileri 
-
-* İş görüşmelerine hazırlanan profesyoneller ve yeni mezunlar 
-
-* Online eğitim sunan kurumlar 
-
-* Öğretmenler ve eğitmenler 
+• Emre / Ürün Yöneticisi
+Yaş: 32
+Meslek: Ürün Yöneticisi
+Hedefi: Sunumlarında daha etkili iletişim kurmak
+Problem: Konu bütünlüğünü bazen kaybediyor, teknik terimlerle dinleyiciyi
+kaybedebiliyor.
+Beklentisi: Anlatım netliği, konu akışı ve gereksiz cümleler konusunda geri bildirim
+almak.
 
 # Product Backlog
+# Mevcut Ürün Özellikleri (MVP)
 
-MVP (Minimum Viable Product) - Çekirdek Fonksiyonlar
+## 1. Konuşma Metnine Dönüştürme
+• Sesli kayıt, OpenAI Whisper veya Google Speech-to-Text kullanılarak metne çevrilir.
+## 2. Metin Tabanlı Konuşma Analizi
+• GPT-4 API kullanılarak:
+o Cümle yapısı kontrol edilir.
+o Anlatım netliği değerlendirilir.
+o Konular arası geçişler analiz edilir.
+o Karmaşık, uzun ya da tekrar eden ifadeler belirlenir.
+## 3. Doldurucu Kelime Tespiti
+• “Şey”, “eee”, “yani” gibi kelimeler belirlenir ve azaltılması yönünde öneriler sunulur.
+## 4. Yazılı Geri Bildirimler
+• Anlaşılır ve uygulanabilir öneriler verilir.
+Örnek: “Bu cümle çok uzun. İkiye bölerek anlatımı sadeleştirebilirsin.”
 
-Kullanıcı Yönetimi:
+# Kullanıcı Deneyimi Akışı
+1. Giriş yap
+2. Sesli veya yazılı konuşma giriş
+3. AI destekli analiz
+4. Yazılı geri bildirim ve öneriler ekranı
+5. Kayıtların geçmişini görüntüleyip gelişim takibi
 
-Kullanıcı kaydı ve girişi.
+# Fayda ve Katma Değer
+Kullanıcılara ölçülebilir, kişisel iletişim gelişimi 
+Eğitmenler için öğrencilerinin gelişimini takip imkânı
+Kurumlara daha donanımlı adaylar
+Bireylerde özgüven ve ifade becerilerinde gözle görülür iyileşme
 
-Kayıt Modülü:
+# Gelecek Planları (V2+ Özellikler)
+Alan Planlanan Özellik
+Ses Analizi Konuşma hızı, tonlama, duygu tespiti (Wav2Vec, librosa)
+Görüntü Analizi Göz teması, jest, mimik, postür (MediaPipe, OpenCV)
+Skor Kartı Anlatım netliği, tutarlılık, özgüven gibi metrikler
+Oyunlaştırma Rozetler, görevler, seviye sistemi
+Peer Feedback Diğer kullanıcılar ya da eğitmen yorumları
+Kurumsal Entegrasyon Okullara, kurslara ve işe alım platformlarına API ile bağlantı
 
-Web uygulaması için WebRTC ve MediaRecorder API kullanarak sesli/görüntülü kayıt özelliği.
-
-Mobil uygulama için Flutter veya React Native ile kayıt fonksiyonu.
-
-Temel Analiz ve Geri Bildirim:
-
-
-Konuşmayı Metne Çevirme: Google Speech-to-Text veya OpenAI Whisper entegrasyonu.
-
-
-Konuşma Hızı ve Dolgu Kelime Analizi: librosa veya pyAudioAnalysis ile temel analizlerin yapılması.
-
-Geri Bildirim Ekranı: Analiz sonuçlarını gösteren basit bir raporlama arayüzü (Konuşma hızı, dolgu kelime sayısı).
-
-Altyapı:
-
-Backend servisinin FastAPI veya Node.js ile oluşturulması.
-
-Veritabanı olarak PostgreSQL veya MongoDB seçimi ve kurulumu.
-
-Sunucu ve depolama için temel bir AWS veya Google Cloud altyapısının kurulması.
-
-Video ve ses dosyalarının sunucuya yüklenmesi ve asenkron işlenmesi.
-
-
-
-# Sürüm 2 - Gelişmiş Analiz ve Detaylı Raporlama
-
-Metin Yapısı Analizi:
-
-GPT-4 API entegrasyonu ile metnin netliği, akıcılığı ve yapısının değerlendirilmesi.
-
-
-Cümle yapısı analizi için 
-
-spaCy entegrasyonu.
-
-Gelişmiş Raporlama:
-
-Analiz sonuçlarını grafiklerle görselleştirme (Hız grafiği vb.).
-
-Skor kartı özelliğinin eklenmesi ("Anlatım Netliği: %85").
-
-Video üzerinde zaman çizelgesine bağlı yorumların gösterilmesi.
-
-Pratik Modları:
-
-"Sunum Yap" ve "Mülakat Simülasyonu" modlarının arayüzde ayrıştırılması.
-
-
-
-# Sürüm 3 - Multimedya Analizi ve Etkileşim
-
-Duygu ve Tonlama Analizi:
-
-Ses tonundan duygu analizi için 
-
-Wav2Vec+LSTM modelinin entegrasyonu.
-
-Vücut Dili Analizi:
-
-Google MediaPipe entegrasyonu ile göz teması, el/kol hareketleri ve postür takibi.
-
-Yüz İfadeleri Analizi:
-
-Microsoft Azure Face API veya Amazon Rekognition ile yüz ifadelerinden duygu çıkarımı.
-
-Gelecek Sürümler ve Genişlemeler (Future Releases)
-
-Oyunlaştırma (Gamification):
-
-Kullanıcı profillerine rozet, puan ve seviye sisteminin eklenmesi.
-
-Sosyal Özellikler:
-
-Akran geri bildirimi (Peer Feedback) özelliğinin geliştirilmesi.
-
-Kurumsal Model:
-
-Kurumsal (B2B) müşteriler için yönetim paneli geliştirilmesi.
-
-Okullar ve şirketler için API entegrasyonu sağlanması.
-
+# Teknoloji Altyapısı
+Bileşen Teknoloji
+Web Uygulama React + WebRTC
+Mobil Uygulama Flutter veya React Native
+Backend FastAPI veya Node.js
+Yapay Zekâ GPT-4 API, Whisper, spaCy
+Veritabanı PostgreSQL veya MongoDB
+Bulut Hizmeti AWS / Google Cloud / Azure
+Frontend (React.js)
+ ⇅
+Backend API (FastAPI veya Node.js)
+ ⇅
+NLP Servisleri (GPT-4, spaCy, transformers)
+ ⇅
+Veritabanı (PostgreSQL)
+ ⇅
+Dosya Depolama (AWS S3 veya Firebase)
 
 
 # Sprint 1
 # Sprint Notları
+# Teknoloji Altyapısı
+Bileşen Teknoloji
+Web Uygulama React + WebRTC
+Mobil Uygulama Flutter veya React Native
+Backend FastAPI veya Node.js
+Yapay Zekâ GPT-4 API, Whisper, spaCy
+Veritabanı PostgreSQL veya MongoDB
+Bulut Hizmeti AWS / Google Cloud / Azure
+Frontend (React.js)
+ ⇅
+Backend API (FastAPI veya Node.js)
+ ⇅
+NLP Servisleri (GPT-4, spaCy, transformers)
+ ⇅
+Veritabanı (PostgreSQL)
+ ⇅
+Dosya Depolama (AWS S3 veya Firebase)
 
-Proje yönetimi aracı olarakJira kullanılmasına karar verildi ve proje panosu oluşturuldu.
 
-Uygulamanın web arayüzü için temel tasarımlar (wireframe) .....  üzerinde hazırlandı.
+Proje yönetimi aracı olarak Jira kullanılmasına karar verildi ve proje panosu oluşturuldu.
 
-Sprint 1'in ana hedefi, kullanıcının kamerasından ve mikrofonundan sesli-görüntülü kayıt alıp bu kaydı sunucuya gönderebilen temel bir prototip oluşturmak olarak belirlendi.
-
-Web uygulaması için .......... teknolojilerinin kullanılmasına karar verildi. Arka plan (backend) altyapısı ........ ile kurulmaya başlandı.
+Jira : https://yztabootcamp.atlassian.net/jira/software/projects/SCRUM/boards/1
 
 # Tahmin Edilen Tamamlanacak Puan
 
@@ -174,39 +139,27 @@ Bu sebeple, en temel ve kritik fonksiyonları içeren "Çekirdek Kayıt ve Anali
 
 Daily Scrum toplantıları her gün Google Meet ve Whatsapp üzerinden yapıldı.
 
-Toplantıdaki "Dün ne yaptım? Bugün ne yapacağım? Bir engelim var mı?" sorularının cevapları, her gün sonunda Whatsapp'taki grubumuza yazılarak kayıt altına alındı.
+Toplantıdaki "Neler Biliyoruz? Neler Geliştirebiliriz?, Neleri Öğrenebiliriz?" sorularının cevapları, her gün sonunda Whatsapp'taki grubumuza yazılarak kayıt altına alındı.
 
-Örnek bir Daily Scrum özeti, proje GitHub reposunda bulunmaktadır.
 
 Sprint Board Updates
 
 Jira panosu, takım üyeleri tarafından günlük olarak güncellendi. "To Do" (Yapılacaklar) listesindeki görevler, üzerinde çalışılmaya başlandığında "In Progress" (Yapılıyor) ve tamamlandığında "Done" (Tamamlandı) listesine taşındı.
 
-Sprint 1 Jira Panosu: https://yztabootcamp.atlassian.net/browse/SCRUM-4?atlOrigin=eyJpIjoiNThiYzI2NTRmZGVjNDU1YWJiODA3YzNjZTJjZTUyY2QiLCJwIjoiaiJ9
+Sprint 1 Jira Panosu: https://yztabootcamp.atlassian.net/jira/software/projects/SCRUM/boards/1
 
-Sprint başı ve sonundaki pano ekran görüntüleri GitHub repomuzda mevcuttur.
-
-# Screenshot
-
-Sprint 1 sonunda ürünümüz, kullanıcının tarayıcı üzerinden kamera ve mikrofon izni vererek kayıt başlatabildiği bir web arayüzüne sahiptir. Kayıt durdurulduğunda, oluşturulan video dosyası arka plana gönderilmeye hazır hale gelmektedir. Arayüz, bu sprintte sadece temel fonksiyonlara odaklanmıştır.
-
-Mevcut arayüzün ekran görüntüsü GitHub reposuna eklenmiştir.
 
 # Sprint Review
 
-Sprint sonunda yapılan sunumda, paydaşlara çalışan prototip gösterildi.
-
-Gösterilen Fonksiyon: Tarayıcı üzerinden başarılı bir şekilde sesli ve görüntülü kayıt yapma özelliği canlı olarak sunuldu.
-
-Gelen Geri Bildirim: Kayıt özelliğinin sorunsuz çalışması olumlu karşılandı. Bir sonraki adım olarak, kullanıcının kaydettiği konuşmanın metne dökülmüş halini görmesinin, ürünün değerini hızla artıracağı belirtildi.
 
 Alınan Karar: Sprint 2'nin en önemli hedefi, Google Speech-to-Text API'sini entegre ederek kaydedilen sesin metin karşılığını kullanıcıya göstermek olacaktır.
 
 # Sprint Retrospective
 
 Neler İyi Gitti?
+Takım arkadaşlarımızla işbirliğimiz ve iletişimimiz iyiydi.
 
-...... ile arka plan kurulumu beklenenden daha hızlı tamamlandı.
+Gemini ile arka plan kurulumu beklenenden daha hızlı tamamlandı.
 
 Neler Daha İyi Olabilirdi?
 
