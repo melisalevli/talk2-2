@@ -104,10 +104,7 @@ Veritabanı (PostgreSQL)
  ⇅
 Dosya Depolama (AWS S3 veya Firebase)
 
-
 Proje yönetimi aracı olarak Jira kullanılmasına karar verildi ve proje panosu oluşturuldu.
-
-Jira : https://yztabootcamp.atlassian.net/jira/software/projects/SCRUM/boards/1
 
 # Tahmin Edilen Tamamlanacak Puan
 
