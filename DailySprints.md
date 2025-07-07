@@ -1,6 +1,7 @@
 # Daily Sprints
 
 # 20 Haziran
+<img width="520" alt="image" src="https://github.com/user-attachments/assets/60b701bb-0c09-477c-9160-a758d97a4c38" />
 
 # 21 Haziran
 
