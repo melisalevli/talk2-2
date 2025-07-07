@@ -1,4 +1,5 @@
 # Daily Sprints
+20 Haziran’daki bootcamp toplantısının ardından, ekip iletişimini hızlandırmak amacıyla WhatsApp grubumuzu oluşturduk.
 
 # 20 Haziran
 <img width="527" alt="image" src="https://github.com/user-attachments/assets/c683083f-2e3b-48d6-949b-4e3d2aecb73e" />
