@@ -25,8 +25,8 @@
 <img width="386" alt="image" src="https://github.com/user-attachments/assets/b15cdee1-4998-4a9b-8a99-acbb47fe7dda" />
 
 # 26 Haziran
-
 Proje konusunu netleştirdikten sonra, 26 Haziran itibarıyla görev dağılımını planlamak amacıyla Jira'da tablolar oluşturmaya başladık
+
 <img width="386" alt="image" src="https://github.com/user-attachments/assets/b8d51cad-63b8-4d2a-887a-a0b8c70a9a41" />
 
 # 27 Haziran
