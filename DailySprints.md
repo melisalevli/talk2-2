@@ -1,4 +1,4 @@
-# Daily Sprints
+# SS Daily Sprints
 
 
 # 20 Haziran
