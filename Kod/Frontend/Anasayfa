@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Talk 2-2</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      background: #bedf74;
+      color: #3b5ba5;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    #historySidebar {
+      width: 280px;
+      background: white;
+      border-right: 3px solid #3b5ba5;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      overflow-y: auto;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.1);
+      transition: width 0.3s ease, padding 0.3s ease, border 0.3s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    #historySidebar.hidden {
+      width: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    #sidebarHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    #sidebarHeader h2 {
+      margin: 0;
+      font-weight: 700;
+      color: #3b5ba5;
+      font-size: 20px;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    #toggleSidebarBtn {
+      background: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      user-select: none;
+    }
+
+    .history-entry {
+      background: #bedf74;
+      border-radius: 12px;
+      padding: 10px 15px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(59,91,165,0.3);
+      font-size: 14px;
+    }
+
+    #logoutContainer {
+      margin-top: auto;
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid #ccc;
+    }
+
+    #logoutBtn {
+      background-color: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 30px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background-color 0.2s ease;
+    }
+
+    #logoutBtn:hover {
+      background-color: #2a447a;
+    }
+
+    #mainContent {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      overflow: hidden;
+      position: relative;
+      z-index: 5;
+    }
+
+    .mic-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+      fill: #3b5ba5;
+      user-select: none;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      border-radius: 20px;
+      border: 1px solid #3b5ba5;
+      background-color: #3b5ba5;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 12px 45px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    button:disabled {
+      background-color: #a1a9d0;
+      border-color: #a1a9d0;
+      cursor: default;
+      color: #ddd;
+    }
+
+    #result {
+      background: #f9f9f9;
+      color: #3b5ba5;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 120px;
+      width: 100%;
+      max-width: 500px;
+      font-size: 16px;
+      font-weight: 600;
+      white-space: pre-wrap;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    #showSidebarBtn,
+    #showAnalysisBtn {
+      position: fixed;
+      top: 20px;
+      background: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      z-index: 20;
+      display: none;
+    }
+
+    #showSidebarBtn { left: 10px; }
+    #showAnalysisBtn { right: 10px; }
+
+    #analysisBox {
+      width: 280px;
+      background: white;
+      border-left: 3px solid #3b5ba5;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      box-shadow: -3px 0 8px rgba(0,0,0,0.1);
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    #analysisBox.hidden {
+      width: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      overflow: hidden;
+      display: none;
+    }
+
+    #analysisHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    #analysisHeader h2 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 20px;
+      color: #3b5ba5;
+    }
+
+    #hideAnalysisBtn {
+      background: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      user-select: none;
+    }
+
+    #analysisResult {
+      font-size: 14px;
+      color: #3b5ba5;
+      font-weight: 600;
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+      white-space: pre-wrap;
+    }
+
+    .speech-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+      padding: 40px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .speech-container h2 {
+      color: #3b5ba5;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <div id="historySidebar">
+    <div id="sidebarHeader">
+      <h2>Speech History</h2>
+      <button id="toggleSidebarBtn">Hide</button>
+    </div>
+    <div id="logoutContainer">
+      <button id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+
+  <!-- Center Content -->
+  <div id="mainContent">
+    <div class="speech-container">
+      <h2>Speech to Text</h2>
+      <svg class="mic-icon" viewBox="0 0 24 24">
+        <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zm-5 7a7 7 0 0 0 7-7h-2a5 5 0 0 1-10 0H5a7 7 0 0 0 7 7zm-1 3h2v2h-2z"/>
+      </svg>
+      <div class="button-group">
+        <button id="recordBtn">Record</button>
+        <button id="doneBtn" disabled>Done</button>
+      </div>
+      <div id="result">Your speech will appear here...</div>
+    </div>
+  </div>
+
+  <!-- Right Analysis Box -->
+  <div id="analysisBox">
+    <div id="analysisHeader">
+      <h2>Analysis Results</h2>
+      <button id="hideAnalysisBtn">Hide</button>
+    </div>
+    <div id="analysisResult">Results will appear here...</div>
+  </div>
+
+  <!-- Show Sidebar & Analysis Buttons -->
+  <button id="showSidebarBtn">Show History</button>
+  <button id="showAnalysisBtn">Show Analysis</button>
+
+  <script>
+    const recordBtn = document.getElementById('recordBtn');
+    const doneBtn = document.getElementById('doneBtn');
+    const resultDiv = document.getElementById('result');
+    const historySidebar = document.getElementById('historySidebar');
+    const analysisBox = document.getElementById('analysisBox');
+    const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+    const showSidebarBtn = document.getElementById('showSidebarBtn');
+    const showAnalysisBtn = document.getElementById('showAnalysisBtn');
+    const hideAnalysisBtn = document.getElementById('hideAnalysisBtn');
+    const analysisResult = document.getElementById('analysisResult');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    let recognition;
+    let isRecording = false;
+    let finalTranscript = '';
+
+    toggleSidebarBtn.addEventListener('click', () => {
+      historySidebar.classList.add('hidden');
+      showSidebarBtn.style.display = 'block';
+    });
+
+    showSidebarBtn.addEventListener('click', () => {
+      historySidebar.classList.remove('hidden');
+      showSidebarBtn.style.display = 'none';
+    });
+
+    hideAnalysisBtn.addEventListener('click', () => {
+      analysisBox.classList.add('hidden');
+      showAnalysisBtn.style.display = 'block';
+    });
+
+    showAnalysisBtn.addEventListener('click', () => {
+      analysisBox.classList.remove('hidden');
+      showAnalysisBtn.style.display = 'none';
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      alert('Logged out!');
+    });
+
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      alert('Sorry, your browser does not support speech recognition.');
+    } else {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = (event) => {
+        finalTranscript = event.results[0][0].transcript;
+      };
+
+      recognition.onend = () => {
+        isRecording = false;
+        recordBtn.disabled = false;
+        doneBtn.disabled = true;
+
+        if (finalTranscript && finalTranscript.trim() !== '') {
+          addToHistory(finalTranscript);
+          resultDiv.textContent = finalTranscript;
+          analysisResult.textContent =
+            "This is a sample analysis of your speech:\n\n" + finalTranscript;
+        } else {
+          resultDiv.textContent = 'No speech detected.';
+          analysisResult.textContent = 'No analysis available.';
+        }
+      };
+
+      recognition.onerror = (event) => {
+        alert('Error occurred in recognition: ' + event.error);
+        isRecording = false;
+        recordBtn.disabled = false;
+        doneBtn.disabled = true;
+      };
+    }
+
+    recordBtn.addEventListener('click', () => {
+      if (recognition && !isRecording) {
+        finalTranscript = '';
+        recognition.start();
+        isRecording = true;
+        recordBtn.disabled = true;
+        doneBtn.disabled = false;
+        resultDiv.textContent = 'Listening...';
+        analysisResult.textContent = '';
+      }
+    });
+
+    doneBtn.addEventListener('click', () => {
+      if (recognition && isRecording) {
+        recognition.stop();
+      }
+    });
+
+    function addToHistory(text) {
+      const entry = document.createElement('div');
+      entry.className = 'history-entry';
+      entry.textContent = text;
+      historySidebar.insertBefore(entry, document.getElementById('logoutContainer'));
+      historySidebar.scrollTop = historySidebar.scrollHeight;
+    }
+  </script>
+</body>
+</html>
