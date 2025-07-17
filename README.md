@@ -129,6 +129,9 @@ Jira panosu, takım üyeleri tarafından günlük olarak güncellendi. "To Do" (
 
 Sprint 1 Jira Panosu: https://yztabootcamp.atlassian.net/jira/software/projects/SCRUM/boards/1
 
+# Screenshots
+
+https://github.com/melisalevli/talk2-2/blob/main/DailySprints.md
 
 # Sprint Review
 
@@ -148,3 +151,21 @@ Bazı görevlerin karmaşıklığını başlangıçta tam olarak kestiremedik.
 Aksiyon Kararları:
 
 Sprint 2 planlamasında, büyük görünen teknik görevleri daha küçük ve yönetilebilir alt görevlere bölerek daha isabetli tahminler yapmaya çalışacağız.
+
+# Sprint 2
+
+# Sprint Notları
+
+# Tahmin Edilen Tamamlanacak Puan
+
+# Tahmin Mantığı
+
+# Daily Scrum
+
+# Sprint Board Updates
+
+# Screenshot
+
+# Sprint Review
+
+# Sprint Retrospective
