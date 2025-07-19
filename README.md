@@ -192,6 +192,8 @@ Projenin toplam iş yükü yaklaşık 120 puan olarak öngörülmüştür. İlk 
 
 Daily Scrum toplantıları her gün Google Meet veya Whatsapp üzerinden yapıldı. Toplantılardaki kararlar ve ilerlemeler, paylaşılan bir doküman ile kayıt altına alındı.
 
+![WhatsApp Image 2025-07-19 at 21 14 03](https://github.com/user-attachments/assets/52ec817d-b4e8-4db8-8d92-3127c4b6484d)
+
 # Sprint Board Updates
 
 Tüm görevler ve ilerlemeler, takım tarafından günlük olarak Jira panosu üzerinden güncellendi. "Yapılacaklar" listesindeki görevler "Devam Edenler" ve ardından "Bitenler" statüsüne taşınarak sprint takibi sağlandı.
