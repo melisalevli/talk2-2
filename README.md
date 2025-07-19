@@ -178,7 +178,7 @@ PostgreSQL veritabanı şeması, transkript metinlerini ve ilgili ses dosyası y
 
 ## Project Management
 
-<img width="1667" height="862" alt="ss4" src="https://github.com/user-attachments/assets/6c692417-ef92-4e09-b891-6f8b5d518f2e" />
+<img width="1110" height="865" alt="Jira" src="https://github.com/user-attachments/assets/32d4b2dc-bbc6-42f8-aafa-aa7dccec0689" />
 
 # Tahmin Edilen Tamamlanacak Puan
 
