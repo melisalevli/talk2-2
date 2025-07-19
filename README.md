@@ -196,6 +196,8 @@ Daily Scrum toplantıları her gün Google Meet veya Whatsapp üzerinden yapıld
 
 Tüm görevler ve ilerlemeler, takım tarafından günlük olarak Jira panosu üzerinden güncellendi. "Yapılacaklar" listesindeki görevler "Devam Edenler" ve ardından "Bitenler" statüsüne taşınarak sprint takibi sağlandı.
 
+Jira : https://yztabootcamp.atlassian.net/jira/software/projects/SCRUM/boards/1
+
 # Screenshot
 
 https://drive.google.com/drive/folders/19_HFV4TAMe78t_DyeaUyygVqBfjf6I9M?usp=sharing
