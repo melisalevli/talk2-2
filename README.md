@@ -210,7 +210,23 @@ https://drive.google.com/drive/folders/19_HFV4TAMe78t_DyeaUyygVqBfjf6I9M?usp=sha
 
 # Sprint Review
 
-Zeynep (Persona1), Emre (Persona2)
+Sprint 2'nin sonunda, tamamlanan işlevleri ve ürün artışını değerlendirmek amacıyla bir Sprint Review toplantısı gerçekleştirilmiştir. Bu toplantının odak noktası, geliştirilen özelliklerin projenin hedef kullanıcılarını temsil eden Persona'lar üzerindeki etkisini ve onlara kattığı değeri ölçmekti.
+
+Bu kapsamda, toplantıya iki ana kullanıcı personamız olan Zeynep (Persona 1) ve Emre (Persona 2)'nin bakış açıları dahil edilmiştir.
+
+Zeynep (Persona 1): Topluluk önünde konuşma yapmaktan çekinen, sunum becerilerini geliştirmek isteyen bir üniversite öğrencisi. Zeynep'in temel ihtiyacı, pratik yapabileceği, konuşmalarını kaydedip tekrar dinleyebileceği ve gelişim alanlarını kolayca görebileceği bir araç.
+
+Emre (Persona 2): Satış ve pazarlama alanında çalışan, müşterilerle sürekli iletişim halinde olan ve ikna kabiliyetini artırmak isteyen bir profesyonel. Emre'nin beklentisi, konuşmalarındaki "eee, ııı" gibi doldurucu kelimeleri tespit edip azaltmasına yardımcı olacak, daha akıcı ve net bir ifade tarzı kazanmasını sağlayacak bir çözüm.
+
+Toplantı Akışı ve Çıktıları:
+
+Sprint Review sırasında, geliştirme ekibi tamamlanan aşağıdaki özellikleri bu iki persona'nın gözünden canlı olarak sergilemiştir:
+
+Anlık Ses Kaydı: Web arayüzü üzerinden Zeynep'in bir sunum provası, Emre'nin ise bir satış konuşması yaptığı simüle edildi. Ses kaydının kolayca başlatılıp durdurulabildiği gösterildi.
+
+Transkripsiyon: Kaydedilen sesin Google Speech-to-Text API'si ile ne kadar başarılı bir şekilde metne döküldüğü incelendi.
+
+Depolama: Kaydın ve metnin ileride tekrar incelenmek üzere güvenli bir şekilde (AWS S3 ve PostgreSQL) saklandığı teyit edildi.
 
 # Sprint Retrospective
 
