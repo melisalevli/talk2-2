@@ -176,7 +176,9 @@ https://github.com/melisalevli/talk2-2/tree/main/Kod
 
 <img width="1915" height="944" alt="ss2" src="https://github.com/user-attachments/assets/ad62aad9-2714-43a1-a10e-d0d5add4c863" />
 
+
 <img width="1913" height="939" alt="SS3" src="https://github.com/user-attachments/assets/37554e83-848e-46d3-8512-9bdb70d70d8c" />
+
 
 <img width="1237" height="670" alt="SS1" src="https://github.com/user-attachments/assets/0c005857-85d2-4d22-b104-165ee84da5fa" />
 
