@@ -172,7 +172,7 @@ PostgreSQL veritabanı şeması, transkript metinlerini ve ilgili ses dosyası y
 
 https://github.com/melisalevli/talk2-2/tree/main/Kod
 
-## Product Screenshot
+## Product Screenshots
 
 <img width="1915" height="944" alt="ss2" src="https://github.com/user-attachments/assets/ad62aad9-2714-43a1-a10e-d0d5add4c863" />
 
