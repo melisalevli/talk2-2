@@ -168,6 +168,10 @@ AWS S3, kullanıcıların ses kayıt dosyalarını kalıcı ve güvenli bir şek
 
 PostgreSQL veritabanı şeması, transkript metinlerini ve ilgili ses dosyası yolunu saklayacak şekilde güncellendi.
 
+## Product Codes
+
+https://github.com/melisalevli/talk2-2/tree/main/Kod
+
 ## Product Screenshot
 
 <img width="1915" height="944" alt="ss2" src="https://github.com/user-attachments/assets/ad62aad9-2714-43a1-a10e-d0d5add4c863" />
