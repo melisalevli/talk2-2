@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Talk 2-2</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      background: #bedf74;
+      color: #3b5ba5;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    #historySidebar {
+      width: 280px;
+      background: white;
+      border-right: 3px solid #3b5ba5;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      overflow-y: auto;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.1);
+      transition: width 0.3s ease, padding 0.3s ease, border 0.3s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    #historySidebar.hidden {
+      width: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    #sidebarHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    #sidebarHeader h2 {
+      margin: 0;
+      font-weight: 700;
+      color: #3b5ba5;
+      font-size: 20px;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    #toggleSidebarBtn {
+      background: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      user-select: none;
+    }
+
+    .history-entry {
+      background: #bedf74;
+      border-radius: 12px;
+      padding: 10px 15px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(59,91,165,0.3);
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .history-entry:hover {
+      transform: translateY(-2px);
+    }
+
+    #logoutContainer {
+      margin-top: auto;
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid #ccc;
+    }
+
+    #logoutBtn {
+      background-color: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 30px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background-color 0.2s ease;
+    }
+
+    #logoutBtn:hover {
+      background-color: #2a447a;
+    }
+
+    #mainContent {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      overflow: hidden;
+      position: relative;
+      z-index: 5;
+    }
+
+    .mic-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+      fill: #3b5ba5;
+      user-select: none;
+      transition: transform 0.3s ease;
+    }
+
+    .mic-icon.recording {
+      animation: pulse 1.5s infinite;
+      fill: #ff4757;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      border-radius: 20px;
+      border: 1px solid #3b5ba5;
+      background-color: #3b5ba5;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 12px 45px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #2a447a;
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      background-color: #a1a9d0;
+      border-color: #a1a9d0;
+      cursor: default;
+      color: #ddd;
+    }
+
+    #result {
+      background: #f9f9f9;
+      color: #3b5ba5;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 120px;
+      width: 100%;
+      max-width: 500px;
+      font-size: 16px;
+      font-weight: 600;
+      white-space: pre-wrap;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+      overflow-y: auto;
+      max-height: 300px;
+    }
+
+    #showSidebarBtn,
+    #showAnalysisBtn {
+      position: fixed;
+      top: 20px;
+      background: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      z-index: 20;
+      display: none;
+    }
+
+    #showSidebarBtn { left: 10px; }
+    #showAnalysisBtn { right: 10px; }
+
+    #analysisBox {
+      width: 280px;
+      background: white;
+      border-left: 3px solid #3b5ba5;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      box-shadow: -3px 0 8px rgba(0,0,0,0.1);
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    #analysisBox.hidden {
+      width: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      overflow: hidden;
+      display: none;
+    }
+
+    #analysisHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    #analysisHeader h2 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 20px;
+      color: #3b5ba5;
+    }
+
+    #hideAnalysisBtn {
+      background: #3b5ba5;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      user-select: none;
+    }
+
+    #analysisResult {
+      font-size: 14px;
+      color: #3b5ba5;
+      font-weight: 600;
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 400px;
+    }
+
+    .speech-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+      padding: 40px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .speech-container h2 {
+      color: #3b5ba5;
+      margin-bottom: 20px;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3b5ba5;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .error {
+      color: #ff4757;
+      background: #ffe0e0;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <div id="historySidebar">
+    <div id="sidebarHeader">
+      <h2>Konuşma Geçmişi</h2>
+      <button id="toggleSidebarBtn">Gizle</button>
+    </div>
+    <div id="logoutContainer">
+      <button id="logoutBtn">Çıkış Yap</button>
+    </div>
+  </div>
+
+  <!-- Center Content -->
+  <div id="mainContent">
+    <div class="speech-container">
+      <h2>Ses Kaydı ve Analiz</h2>
+      <svg class="mic-icon" viewBox="0 0 24 24">
+        <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zm-5 7a7 7 0 0 0 7-7h-2a5 5 0 0 1-10 0H5a7 7 0 0 0 7 7zm-1 3h2v2h-2z"/>
+      </svg>
+      <div class="button-group">
+        <button id="recordBtn">Kaydet</button>
+        <button id="doneBtn" disabled>Bitir</button>
+        <button id="analyzeBtn" disabled>Analiz Et</button>
+      </div>
+      <div class="status" id="status">Kayıt başlatmak için "Kaydet" butonuna tıklayın</div>
+      <div id="result">Konuşmanız burada görünecek...</div>
+    </div>
+  </div>
+
+  <!-- Right Analysis Box -->
+  <div id="analysisBox">
+    <div id="analysisHeader">
+      <h2>Analiz Sonuçları</h2>
+      <button id="hideAnalysisBtn">Gizle</button>
+    </div>
+    <div id="analysisResult">Sonuçlar burada görünecek...</div>
+  </div>
+
+  <!-- Show Sidebar & Analysis Buttons -->
+  <button id="showSidebarBtn">Geçmişi Göster</button>
+  <button id="showAnalysisBtn">Analizi Göster</button>
+
+  <script>
+    // DOM Elements
+    const recordBtn = document.getElementById('recordBtn');
+    const doneBtn = document.getElementById('doneBtn');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const resultDiv = document.getElementById('result');
+    const statusDiv = document.getElementById('status');
+    const historySidebar = document.getElementById('historySidebar');
+    const analysisBox = document.getElementById('analysisBox');
+    const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+    const showSidebarBtn = document.getElementById('showSidebarBtn');
+    const showAnalysisBtn = document.getElementById('showAnalysisBtn');
+    const hideAnalysisBtn = document.getElementById('hideAnalysisBtn');
+    const analysisResult = document.getElementById('analysisResult');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const micIcon = document.querySelector('.mic-icon');
+
+    // Variables
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+    let currentTranscript = '';
+    let audioBlob = null;
+    let mimeType = '';
+
+    // API Configuration
+    const API_BASE_URL = 'http://localhost:8001';
+
+    // Determine supported MIME types
+    if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/webm')) {
+        mimeType = 'audio/webm';
+    } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/ogg')) {
+        mimeType = 'audio/ogg';
+    } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/mp4')) {
+        mimeType = 'audio/mp4';
+    } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/wav')) {
+        mimeType = 'audio/wav';
+    } else {
+        console.warn('Desteklenen bir ses formatı bulunamadı.');
+    }
+
+    // Sidebar Controls
+    toggleSidebarBtn.addEventListener('click', () => {
+      historySidebar.classList.add('hidden');
+      showSidebarBtn.style.display = 'block';
+    });
+
+    showSidebarBtn.addEventListener('click', () => {
+      historySidebar.classList.remove('hidden');
+      showSidebarBtn.style.display = 'none';
+    });
+
+    hideAnalysisBtn.addEventListener('click', () => {
+      analysisBox.classList.add('hidden');
+      showAnalysisBtn.style.display = 'block';
+    });
+
+    showAnalysisBtn.addEventListener('click', () => {
+      analysisBox.classList.remove('hidden');
+      showAnalysisBtn.style.display = 'none';
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      alert('Çıkış yapıldı!');
+    });
+
+    // Recording Functions
+    async function startRecording() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        
+        if (!mimeType) {
+          showError('Desteklenen bir ses formatı bulunamadı.');
+          return;
+        }
+        
+        mediaRecorder = new MediaRecorder(stream, { mimeType });
+        audioChunks = [];
+
+        mediaRecorder.ondataavailable = (event) => {
+          audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = async () => {
+          const extension = mimeType.split('/')[1];
+          audioBlob = new Blob(audioChunks, { type: mimeType });
+          await transcribeAudio(audioBlob, extension);
+          stream.getTracks().forEach(track => track.stop());
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+        recordBtn.disabled = true;
+        doneBtn.disabled = false;
+        analyzeBtn.disabled = true;
+        micIcon.classList.add('recording');
+        statusDiv.textContent = '🎙️ Kayıt yapılıyor... Konuşmaya başlayın!';
+        resultDiv.textContent = '';
+        analysisResult.textContent = '';
+      } catch (error) {
+        console.error('Error starting recording:', error);
+        statusDiv.textContent = '❌ Mikrofon erişimi reddedildi';
+        showError('Mikrofon erişimi gerekli. Lütfen izin verin.');
+      }
+    }
+
+    function stopRecording() {
+      if (mediaRecorder && isRecording) {
+        mediaRecorder.stop();
+        isRecording = false;
+        recordBtn.disabled = false;
+        doneBtn.disabled = true;
+        micIcon.classList.remove('recording');
+        statusDiv.textContent = '⏳ Ses dosyası işleniyor...';
+      }
+    }
+
+    // API Functions
+    async function transcribeAudio(audioBlob, extension = 'webm') {
+      try {
+        const formData = new FormData();
+        formData.append('file', audioBlob, `recording.${extension}`);
+
+        const response = await fetch(`${API_BASE_URL}/transcribe`, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.success) {
+          currentTranscript = data.transcript;
+          resultDiv.textContent = currentTranscript;
+          analyzeBtn.disabled = false;
+                  statusDiv.textContent = '✅ Transkript tamamlandı! Analiz için "Analiz Et" butonuna tıklayın.';
+          addToHistory(currentTranscript);
+        } else {
+          throw new Error('Transcription failed');
+        }
+      } catch (error) {
+        console.error('Transcription error:', error);
+      statusDiv.textContent = '❌ Transkript hatası oluştu';
+        showError('Ses dosyası işlenirken hata oluştu. Lütfen tekrar deneyin.');
+      }
+    }
+
+    async function analyzeSpeech() {
+      if (!currentTranscript) {
+        showError('Analiz edilecek konuşma bulunamadı');
+        return;
+      }
+
+      try {
+        analyzeBtn.disabled = true;
+        statusDiv.textContent = '🧠 Konuşma analiz ediliyor...';
+        analysisResult.textContent = 'Analiz yapılıyor...';
+
+        const response = await fetch(`${API_BASE_URL}/analyze`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ transcript: currentTranscript })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.success) {
+          const analysis = data.analysis;
+          
+          // Analiz sonuçlarını formatla
+          let analysisText = `📊 KONUŞMA ANALİZİ\n\n`;
+          
+          // Doldurucu kelime analizi
+          analysisText += `🎯 DOLDURUCU KELİME ANALİZİ:\n`;
+          analysisText += `• Toplam kelime: ${analysis.filler_analysis.total_words}\n`;
+          analysisText += `• Doldurucu kelime sayısı: ${analysis.filler_analysis.filler_word_count}\n`;
+          analysisText += `• Doldurucu kelime oranı: %${analysis.filler_analysis.filler_word_ratio}\n`;
+          
+          if (analysis.filler_analysis.filler_words_found.length > 0) {
+            analysisText += `• Bulunan doldurucu kelimeler: ${analysis.filler_analysis.filler_words_found.join(', ')}\n`;
+          }
+          
+          analysisText += `\n📝 CÜMLE YAPISI ANALİZİ:\n`;
+          analysisText += `• Toplam cümle sayısı: ${analysis.sentence_analysis.sentence_count}\n`;
+          analysisText += `• Ortalama cümle uzunluğu: ${analysis.sentence_analysis.avg_sentence_length} kelime\n`;
+          
+          if (analysis.sentence_analysis.long_sentences.length > 0) {
+            analysisText += `• Çok uzun cümle sayısı: ${analysis.sentence_analysis.long_sentences.length}\n`;
+          }
+          
+          if (analysis.sentence_analysis.repeated_words.length > 0) {
+            analysisText += `• Tekrar eden kelimeler: ${analysis.sentence_analysis.repeated_words.length} adet\n`;
+          }
+          
+          analysisText += `\n⭐ GENEL DEĞERLENDİRME:\n`;
+          analysisText += `• Kalite puanı: ${analysis.quality_score}/100\n`;
+          
+          // Ollama analizi varsa göster
+          if (analysis.ollama_analysis && analysis.ollama_analysis.success) {
+            const ollama = analysis.ollama_analysis.analysis;
+            analysisText += `\n🤖 AI ANALİZİ:\n`;
+            analysisText += `• Anlatım Netliği: ${ollama.anlatim_netligi}/10\n`;
+            analysisText += `• Akıcılık: ${ollama.akicilik}/10\n`;
+            analysisText += `• Doldurucu Kelime: ${ollama.doldurucu_kelime}/10\n`;
+            analysisText += `• Cümle Yapısı: ${ollama.cumle_yapisi}/10\n`;
+            analysisText += `• Genel Değerlendirme: ${ollama.genel_degerlendirme}\n`;
+          }
+          
+          analysisText += `\n💡 ÖNERİLER:\n`;
+          analysis.recommendations.forEach(rec => {
+            analysisText += `• ${rec}\n`;
+          });
+          
+          analysisResult.textContent = analysisText;
+          statusDiv.textContent = '🎉 Analiz tamamlandı!';
+          analysisBox.classList.remove('hidden');
+          showAnalysisBtn.style.display = 'none';
+        } else {
+          throw new Error('Analysis failed');
+        }
+      } catch (error) {
+        console.error('Analysis error:', error);
+        statusDiv.textContent = '❌ Analiz hatası oluştu';
+        showError('Analiz sırasında hata oluştu. Lütfen tekrar deneyin.');
+      } finally {
+        analyzeBtn.disabled = false;
+      }
+    }
+
+    // Utility Functions
+    function showError(message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error';
+      errorDiv.textContent = message;
+      resultDiv.parentNode.insertBefore(errorDiv, resultDiv);
+      
+      setTimeout(() => {
+        errorDiv.remove();
+      }, 5000);
+    }
+
+    function addToHistory(text) {
+      // Veritabanına kaydet
+      saveToDatabase(text);
+      
+      const entry = document.createElement('div');
+      entry.className = 'history-entry';
+      entry.textContent = text.length > 50 ? text.substring(0, 50) + '...' : text;
+      entry.title = text;
+      
+      entry.addEventListener('click', () => {
+        currentTranscript = text;
+        resultDiv.textContent = text;
+        analyzeBtn.disabled = false;
+        statusDiv.textContent = 'Geçmiş konuşma yüklendi. Analiz için "Analiz Et" butonuna tıklayın.';
+      });
+      
+      historySidebar.insertBefore(entry, document.getElementById('logoutContainer'));
+      historySidebar.scrollTop = historySidebar.scrollHeight;
+    }
+
+    // Veritabanına kaydetme fonksiyonu
+    async function saveToDatabase(text) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/save_transcript`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            transcript_text: text, 
+            user_id: 1 
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.success) {
+          console.log('Transcript saved to database with ID:', data.id);
+        } else {
+          console.error('Failed to save transcript to database');
+        }
+      } catch (error) {
+        console.error('Error saving to database:', error);
+      }
+    }
+
+    // Event Listeners
+    recordBtn.addEventListener('click', startRecording);
+    doneBtn.addEventListener('click', stopRecording);
+    analyzeBtn.addEventListener('click', analyzeSpeech);
+
+    // Sayfa yüklendiğinde geçmişi yükle
+    window.addEventListener('load', loadHistoryFromDatabase);
+
+    // Veritabanından geçmişi yükleme fonksiyonu
+    async function loadHistoryFromDatabase() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/transcripts`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.success && data.transcripts) {
+          // Mevcut geçmişi temizle
+          const existingEntries = historySidebar.querySelectorAll('.history-entry');
+          existingEntries.forEach(entry => entry.remove());
+          
+          // Veritabanından gelen kayıtları ekle
+          data.transcripts.forEach(transcript => {
+            addToHistoryDisplay(transcript.transcript_text);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading history from database:', error);
+      }
+    }
+
+    // Sadece görüntüleme için (veritabanına kaydetmeden)
+    function addToHistoryDisplay(text) {
+      const entry = document.createElement('div');
+      entry.className = 'history-entry';
+      entry.textContent = text.length > 50 ? text.substring(0, 50) + '...' : text;
+      entry.title = text;
+      
+      entry.addEventListener('click', () => {
+        currentTranscript = text;
+        resultDiv.textContent = text;
+        analyzeBtn.disabled = false;
+        statusDiv.textContent = 'Geçmiş konuşma yüklendi. Analiz için "Analiz Et" butonuna tıklayın.';
+      });
+      
+      historySidebar.insertBefore(entry, document.getElementById('logoutContainer'));
+      historySidebar.scrollTop = historySidebar.scrollHeight;
+    }
+
+    // Check if browser supports MediaRecorder
+    if (!window.MediaRecorder) {
+      showError('Tarayıcınız ses kaydını desteklemiyor. Lütfen modern bir tarayıcı kullanın.');
+      recordBtn.disabled = true;
+    }
+  </script>
+</body>
+</html> 

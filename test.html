@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk 2-2 - Ses Kayıt Testi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .mic-icon {
+            width: 60px;
+            height: 60px;
+            fill: #3b5ba5;
+            margin: 20px auto;
+            display: block;
+        }
+        .mic-icon.recording {
+            animation: pulse 1.5s infinite;
+            fill: #ff4757;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background-color: #3b5ba5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover:not(:disabled) {
+            background-color: #2a447a;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .status {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #e8f4fd;
+            border-radius: 5px;
+            color: #3b5ba5;
+        }
+        .result {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+        .error {
+            background-color: #ffe0e0;
+            color: #ff4757;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background-color: #e0ffe0;
+            color: #28a745;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎤 Talk 2-2 - Ses Kayıt Testi</h1>
+        
+        <svg class="mic-icon" viewBox="0 0 24 24">
+            <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zm-5 7a7 7 0 0 0 7-7h-2a5 5 0 0 1-10 0H5a7 7 0 0 0 7 7zm-1 3h2v2h-2z"/>
+        </svg>
+        
+        <div class="button-group">
+            <button id="recordBtn">🎙️ Kaydet</button>
+            <button id="stopBtn" disabled>⏹️ Durdur</button>
+            <button id="analyzeBtn" disabled>📊 Analiz Et</button>
+        </div>
+        
+        <div class="status" id="status">Kayıt başlatmak için "Kaydet" butonuna tıklayın</div>
+        
+        <div class="result" id="result">Konuşmanız burada görünecek...</div>
+        
+        <div id="analysis" style="display: none;">
+            <h3>📈 Analiz Sonuçları</h3>
+            <div class="result" id="analysisResult">Analiz sonuçları burada görünecek...</div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const recordBtn = document.getElementById('recordBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const statusDiv = document.getElementById('status');
+        const resultDiv = document.getElementById('result');
+        const analysisDiv = document.getElementById('analysis');
+        const analysisResult = document.getElementById('analysisResult');
+        const micIcon = document.querySelector('.mic-icon');
+
+        // Variables
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+        let currentTranscript = '';
+        let mimeType = '';
+
+        // API Configuration
+        const API_BASE_URL = 'http://localhost:8001';
+
+        // Check browser support
+        if (!window.MediaRecorder) {
+            showError('Tarayıcınız ses kaydını desteklemiyor. Lütfen modern bir tarayıcı kullanın.');
+            recordBtn.disabled = true;
+        }
+
+        // Determine supported MIME types
+        if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/webm')) {
+            mimeType = 'audio/webm';
+        } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/ogg')) {
+            mimeType = 'audio/ogg';
+        } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/mp4')) {
+            mimeType = 'audio/mp4';
+        } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/wav')) {
+            mimeType = 'audio/wav';
+        } else {
+            showError('Tarayıcınızda desteklenen bir ses formatı bulunamadı.');
+        }
+
+        // Recording Functions
+        async function startRecording() {
+            let stream;
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            } catch (err) {
+                showError('Mikrofon erişimi alınamadı: ' + err.message);
+                statusDiv.textContent = '❌ Mikrofon erişimi alınamadı: ' + err.message;
+                return;
+            }
+            if (!stream) {
+                showError('Mikrofon erişimi alınamadı.');
+                statusDiv.textContent = '❌ Mikrofon erişimi alınamadı.';
+                return;
+            }
+            if (!mimeType) {
+                showError('Desteklenen bir ses formatı bulunamadı.');
+                return;
+            }
+            mediaRecorder = new MediaRecorder(stream, { mimeType });
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = (event) => {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: mimeType });
+                const extension = mimeType.split('/')[1];
+                await transcribeAudio(audioBlob, extension);
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            mediaRecorder.start();
+            isRecording = true;
+            recordBtn.disabled = true;
+            stopBtn.disabled = false;
+            analyzeBtn.disabled = true;
+            micIcon.classList.add('recording');
+            statusDiv.textContent = '🎙️ Kayıt yapılıyor... Konuşmaya başlayın!';
+            resultDiv.textContent = '';
+            analysisDiv.style.display = 'none';
+            
+            showSuccess('Kayıt başlatıldı! Konuşmaya başlayabilirsiniz.');
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                recordBtn.disabled = false;
+                stopBtn.disabled = true;
+                micIcon.classList.remove('recording');
+                statusDiv.textContent = '⏳ Ses dosyası işleniyor...';
+                showSuccess('Kayıt durduruldu. Ses dosyası işleniyor...');
+            }
+        }
+
+        // API Functions
+        async function transcribeAudio(audioBlob, extension = 'webm') {
+            try {
+                const formData = new FormData();
+                formData.append('file', audioBlob, `recording.${extension}`);
+
+                statusDiv.textContent = '🔄 OpenAI Whisper ile transkript yapılıyor...';
+
+                const response = await fetch(`${API_BASE_URL}/transcribe`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentTranscript = data.transcript;
+                    resultDiv.textContent = currentTranscript;
+                    analyzeBtn.disabled = false;
+                    statusDiv.textContent = '✅ Transkript tamamlandı! Analiz için "Analiz Et" butonuna tıklayın.';
+                    showSuccess('Ses başarıyla metne çevrildi!');
+                } else {
+                    throw new Error('Transcription failed');
+                }
+            } catch (error) {
+                console.error('Transkript hatası:', error);
+                statusDiv.textContent = '❌ Transkript hatası oluştu';
+                showError('Ses dosyası işlenirken hata oluştu. Lütfen tekrar deneyin.');
+            }
+        }
+
+        async function analyzeSpeech() {
+            if (!currentTranscript) {
+                showError('Analiz edilecek konuşma bulunamadı');
+                return;
+            }
+
+            try {
+                analyzeBtn.disabled = true;
+                statusDiv.textContent = '🧠 GPT-4 ile konuşma analiz ediliyor...';
+                analysisResult.textContent = 'Analiz yapılıyor...';
+                analysisDiv.style.display = 'block';
+
+                const response = await fetch(`${API_BASE_URL}/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ transcript: currentTranscript })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    analysisResult.textContent = data.analysis;
+                    statusDiv.textContent = '🎉 Analiz tamamlandı!';
+                    showSuccess('Konuşma analizi başarıyla tamamlandı!');
+                } else {
+                    throw new Error('Analysis failed');
+                }
+            } catch (error) {
+                console.error('Analiz hatası:', error);
+                statusDiv.textContent = '❌ Analiz hatası oluştu';
+                showError('Analiz sırasında hata oluştu. Lütfen tekrar deneyin.');
+            } finally {
+                analyzeBtn.disabled = false;
+            }
+        }
+
+        // Utility Functions
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.textContent = message;
+            resultDiv.parentNode.insertBefore(errorDiv, resultDiv);
+            
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success';
+            successDiv.textContent = message;
+            resultDiv.parentNode.insertBefore(successDiv, resultDiv);
+            
+            setTimeout(() => {
+                successDiv.remove();
+            }, 3000);
+        }
+
+        // Event Listeners
+        recordBtn.addEventListener('click', startRecording);
+        stopBtn.addEventListener('click', stopRecording);
+        analyzeBtn.addEventListener('click', analyzeSpeech);
+
+        // Test API connection
+        async function testAPI() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/`);
+                if (response.ok) {
+                    console.log('✅ API bağlantısı başarılı');
+                } else {
+                    console.log('❌ API bağlantısı başarısız');
+                }
+            } catch (error) {
+                console.log('❌ API bağlantısı hatası:', error);
+            }
+        }
+
+        // Test API on page load
+        testAPI();
+    </script>
+</body>
+</html> 
