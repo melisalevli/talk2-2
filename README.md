@@ -289,6 +289,8 @@ Jira : https://yztabootcamp.atlassian.net/jira/software/projects/SCRUM/boards/1
 
 https://drive.google.com/drive/folders/19_HFV4TAMe78t_DyeaUyygVqBfjf6I9M
 
+<img width="1907" height="923" alt="MEET" src="https://github.com/user-attachments/assets/4eb07aeb-b8ea-4f5f-9415-b295b98e6f4b" />
+
 # Sprint Review
 Sprint sonunda yapılacak olan Sprint Review toplantısında, tamamlanan uçtan uca analiz akışı paydaşlara sunulacaktır. Toplantının odak noktası, geliştirilen özelliklerin persona'lar üzerindeki etkisini göstermek olacaktır:
 
