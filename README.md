@@ -250,9 +250,9 @@ Bu sprint'in ana odağı, ürünümüzün temel yapay zekâ analiz yeteneğini u
 
 "Analiz Et" Butonu Entegrasyonu: Kullanıcının transkriptini gördüğü ekrana, analiz sürecini tetikleyecek bir "Analiz Et" butonu eklendi.
 
-Backend Analiz Servisi: FastAPI kullanılarak, metinleri kabul eden ve analiz için GPT-4 API'sine gönderen yeni bir backend endpoint'i (/analyze) oluşturulacaktır. Bu servis; doldurucu kelimeler, anlatım netliği ve cümle yapısı gibi metrikleri işliyor.
+Backend Analiz Servisi: FastAPI kullanılarak, metinleri kabul eden ve analiz için Olama gönderen yeni bir backend endpoint'i (/analyze) oluşturulacaktır. Bu servis; doldurucu kelimeler, anlatım netliği ve cümle yapısı gibi metrikleri işliyor.
 
-Geri Bildirim Arayüzü (UI): GPT-4'ten dönen analiz sonuçlarının ve önerilerin, kullanıcıya anlaşılır ve sade bir geri bildirim ekranında sunulması için React ile gerekli arayüz bileşenleri geliştirildi.
+Geri Bildirim Arayüzü (UI): Olama'dan dönen analiz sonuçlarının ve önerilerin, kullanıcıya anlaşılır ve sade bir geri bildirim ekranında sunulması için React ile gerekli arayüz bileşenleri geliştirildi.
 
 Veritabanı Entegrasyonu: Analiz sonuçları, ilerideki gelişim takibi için PostgreSQL veritabanında ilgili kullanıcı kaydıyla ilişkilendirilerek saklandı.
 
@@ -304,4 +304,4 @@ Sprint'in ardından yapılacak olan Retrospective toplantısında, takım olarak
 
 Neler İyi Gitti?: Büyük teknik görevleri alt görevlere bölme pratiğimiz bu sprint'te işe yaradı mı? Takım içi iletişimimiz nasıldı?
 
-Neler Daha İyi Olabilirdi?: GPT-4 entegrasyonu sırasında beklemediğimiz zorluklar yaşadık mı? Prompt mühendisliği süreci tahmin ettiğimiz kadar sürdü mü?
+Neler Daha İyi Olabilirdi?: Olama entegrasyonu sırasında beklemediğimiz zorluklar yaşadık mı? Prompt mühendisliği süreci tahmin ettiğimiz kadar sürdü mü?
